@@ -4,7 +4,7 @@
 
 #define LED_PIN_BOARD     13
 #define LED_PIN_STRIP     10
-#define NUM_LEDS          50
+#define NUM_LEDS          61
 #define BRIGHTNESS        250
 
 #define LED_TYPE    WS2811
