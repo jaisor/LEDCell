@@ -1,83 +1,63 @@
 #include <Arduino.h>
-
 #include <FastLED.h>
+#include <vector>
+
+#include "modes/HoneyOrangeMode.h"
+#include "modes/PaletteMode.h"
+
+#define BRIGHTNESS        255  // 0-255
+#define CHANGE_MODE_SEC   60
 
 #define LED_PIN_BOARD     13
 #define LED_PIN_STRIP     10
 #define NUM_LEDS          61
-#define BRIGHTNESS        250
 
 #define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
 
-#define HONEY_DARK_ORANGE 0x5c2b00
-#define HONEY_ORANGE 0xff8400
-#define HONEY_LIGHT_ORANGE 0xffaa00
-#define HONEY_YELLOW 0xffcc00
-
 CRGB leds[NUM_LEDS];
 
-#define UPDATES_PER_SECOND 50
-
-CRGBPalette16 currentPalette;
-TBlendType currentBlending;
-
-
-
-extern const TProgmemRGBPalette16 HoneyOrange_p FL_PROGMEM =
-{
-    HONEY_DARK_ORANGE,
-    HONEY_DARK_ORANGE,
-    HONEY_DARK_ORANGE,
-    HONEY_DARK_ORANGE,
-
-    HONEY_ORANGE,
-    HONEY_ORANGE,
-    HONEY_ORANGE,
-    HONEY_ORANGE,
-
-    HONEY_LIGHT_ORANGE,
-    HONEY_LIGHT_ORANGE,
-    HONEY_LIGHT_ORANGE,
-    HONEY_LIGHT_ORANGE,
-    
-    HONEY_YELLOW,
-    HONEY_YELLOW,
-    HONEY_YELLOW,
-    HONEY_YELLOW,
-};
-
-void fillLEDsFromPaletteColors( uint8_t colorIndex)
-{
-    for( int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = ColorFromPalette( currentPalette, colorIndex, BRIGHTNESS, currentBlending);
-        colorIndex++;
-    }
-}
+std::vector<CBaseMode*> modes;
 
 void setup() {
   delay( 1000 ); // power-up safety delay
   FastLED.addLeds<LED_TYPE, LED_PIN_STRIP, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
   FastLED.setBrightness( BRIGHTNESS );
 
-  currentPalette = HoneyOrange_p; //LavaColors_p;
-  currentBlending = LINEARBLEND;
-
   pinMode(LED_PIN_BOARD, OUTPUT);
   digitalWrite(LED_PIN_BOARD, HIGH);
+
+  modes.push_back(new CHoneyOrangeMode(NUM_LEDS));
+  modes.push_back(new CPaletteMode(NUM_LEDS, RainbowStripeColors_p, 1, NOBLEND, 25));
+  modes.push_back(new CPaletteMode(NUM_LEDS, PartyColors_p, 1));
+  modes.push_back(new CPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
+  modes.push_back(new CPaletteMode(NUM_LEDS, RainbowColors_p, 255 * 3 / NUM_LEDS ));
+  modes.push_back(new CPaletteMode(NUM_LEDS, CloudColors_p, 1, NOBLEND, 50));
+  modes.push_back(new CPaletteMode(NUM_LEDS, ForestColors_p, 255 / NUM_LEDS));
+  modes.push_back(new CPaletteMode(NUM_LEDS, OceanColors_p, 255 * 2 / NUM_LEDS, NOBLEND, 100));
+  modes.push_back(new CPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
 }
 
 void loop() {
-  static uint8_t startIndex = 0;
+  static uint8_t currentMode = 0;
+  static unsigned long tsMillis = millis();
   static bool boardLedOn = false;
 
   // Blink board LED
   digitalWrite(13, boardLedOn ? HIGH : LOW);
   boardLedOn = !boardLedOn;
 
-  startIndex++;
-  fillLEDsFromPaletteColors(startIndex);
+  modes[currentMode]->draw(leds);
 
-  FastLED.show();
-  FastLED.delay(1000 / UPDATES_PER_SECOND);
+  FastLED.show(BRIGHTNESS);
+  FastLED.delay(10);
+
+  // Change modes every so often 
+  if (millis() - tsMillis > CHANGE_MODE_SEC * 1000) {
+    tsMillis = millis();
+    currentMode++; 
+    if (currentMode > modes.size()-1) {
+      currentMode = 0;
+    }
+  }
 }
