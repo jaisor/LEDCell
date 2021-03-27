@@ -35,5 +35,6 @@ White PLA with some level of translucency (most white PLA should work). I have u
 * [eSUN PLA PRO White](https://www.amazon.com/gp/product/B01EKEMIIS/) - warm and cool white work good, warm is a bit more translucent
 * [Hatchbox PLA White](https://www.amazon.com/gp/product/B00J0GMMP6)
 
-I print at around 200C nozzle. Layer height at half of nozzle diameter. 
+I print at around 200C nozzle. Layer height at half of nozzle diameter. No supports needed for any of the parts. 
+No need for brim and should be printed without raft to ensure smooth bottom layer.
 Prints well on 0.6mm nozzle with 0.3 mm hegight. The rest of the settings are printer specifics.
