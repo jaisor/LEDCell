@@ -10,6 +10,8 @@ I have used [this WS2812B strip](https://www.amazon.com/gp/product/B08B59CBK9/) 
 The LEDs are powered directly by the USB 5V and proper 1A+ USB adapter should be able adequate unless burning all LEDs at max-white continuously, 
 which will cause overheat issues as well.
 
+Once all is ready and tested, I used some E6000 glue to secure the controller and LEDs, but other adhesives or mouting tapes might work.
+
 ![Wiring](/pics/Wires.jpg)
 ![Plugged In](/pics/On.jpg)
 
