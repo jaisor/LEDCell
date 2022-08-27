@@ -6,8 +6,8 @@ class CPaletteMode : public CBaseMode {
 
 private:
     uint8_t startIndex = 0;
-    const uint8_t increment;
     const TProgmemRGBPalette16& palette;
+    const uint8_t increment;
     const TBlendType blendType;
     const unsigned long delay;
 

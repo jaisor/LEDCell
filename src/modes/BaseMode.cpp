@@ -1,5 +1,5 @@
 #include "BaseMode.h"
 
-CBaseMode::CBaseMode(const uint8_t numLeds)
+CBaseMode::CBaseMode(const uint16_t numLeds)
 : numLeds(numLeds) {
 }
