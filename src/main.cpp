@@ -28,6 +28,14 @@ CRGB leds[NUM_LEDS];
 
 std::vector<CBaseMode*> modes;
 
+extern const TProgmemRGBPalette16 ESporta_p FL_PROGMEM =
+{
+    0x012427, 0x012427, 0x008996, 0x008996 ,
+    0x09c4d6, 0x09c4d6, 0x09c4d6, 0xFFFFFF,
+    0xFFFFFF, 0x09c4d6, 0x09c4d6, 0x09c4d6,
+    0x008996, 0x008996, 0x012427, 0x012427
+};
+
 void setup() {
     delay( 1000 ); // power-up safety delay
     FastLED.addLeds<LED_TYPE, LED_PIN_STRIP, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
@@ -36,24 +44,32 @@ void setup() {
     pinMode(LED_PIN_BOARD, OUTPUT);
     digitalWrite(LED_PIN_BOARD, HIGH);
 
+    //modes.push_back(new CPaletteMode(NUM_LEDS, ESporta_p, 255 / NUM_LEDS));
+    modes.push_back(new CPaletteMode(NUM_LEDS, LavaColors_p, 255 / NUM_LEDS));
     modes.push_back(new CHoneyOrangeMode(NUM_LEDS));
     modes.push_back(new CPaletteMode(NUM_LEDS, RainbowStripeColors_p, 1, LINEARBLEND, 25));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, RainbowStripeColors_p, 1, LINEARBLEND, 25));
     modes.push_back(new CPaletteMode(NUM_LEDS, PartyColors_p, 1));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, PartyColors_p, 1));
     modes.push_back(new CPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
     modes.push_back(new CPaletteMode(NUM_LEDS, RainbowColors_p, 255 * 3 / NUM_LEDS ));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, RainbowColors_p, 255 * 3 / NUM_LEDS ));
     modes.push_back(new CPaletteMode(NUM_LEDS, CloudColors_p, 1, LINEARBLEND, 50));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, CloudColors_p, 1, LINEARBLEND, 50));
     modes.push_back(new CPaletteMode(NUM_LEDS, ForestColors_p, 255 / NUM_LEDS));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, ForestColors_p, 255 / NUM_LEDS));
     modes.push_back(new CPaletteMode(NUM_LEDS, OceanColors_p, 255 * 2 / NUM_LEDS, LINEARBLEND, 100));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, OceanColors_p, 255 * 2 / NUM_LEDS, LINEARBLEND, 100));
     modes.push_back(new CPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
-    modes.push_back(new CRingPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
+    
     modes.push_back(new CHoneyBlueRingMode(NUM_LEDS));
+    
+    //modes.push_back(new CRingPaletteMode(NUM_LEDS, ESporta_p, 255 / NUM_LEDS));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, LavaColors_p, 255 / NUM_LEDS));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, RainbowStripeColors_p, 1, LINEARBLEND, 25));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, PartyColors_p, 1));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, RainbowColors_p, 255 * 3 / NUM_LEDS ));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, CloudColors_p, 1, LINEARBLEND, 50));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, ForestColors_p, 255 / NUM_LEDS));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, OceanColors_p, 255 * 2 / NUM_LEDS, LINEARBLEND, 100));
+    modes.push_back(new CRingPaletteMode(NUM_LEDS, HeatColors_p, 255 / NUM_LEDS));
+    
+    
 }
 
 void loop() {
