@@ -32,7 +32,7 @@ STL files:
 ### Printing recommendations
 
 White PLA with some level of translucency (most white PLA should work). I have used the following succesfully:
-* [eSUN PLA PRO White](https://www.amazon.com/gp/product/B01EKEMIIS/) - warm and cool white work good, warm is a bit more translucent
+* [ELEGOO PLA Plus](https://www.amazon.com/dp/B0C14M5HR9) - warm and cool white work good, warm is a bit more translucent
 * [Hatchbox PLA White](https://www.amazon.com/gp/product/B00J0GMMP6)
 
 I print at around 200C nozzle. Layer height at half of nozzle diameter. No supports needed for any of the parts. 
