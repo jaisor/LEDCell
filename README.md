@@ -1,10 +1,10 @@
 # LEDCell
 
-3D printed xehagonal shape with LED stip glued on the inner wall. 
+3D printed hexagonal shape with LED stip glued on the inner wall. 
 Logic driven by a [Seeeduino XIAO](https://www.seeedstudio.com/Seeeduino-XIAO-Arduino-Microcontroller-SAMD21-Cortex-M0+-p-4426.html) XIAO 
 using the [FastLED](https://github.com/FastLED/FastLED) library. The controller requires USB-C cable.
 
-LED strip needs to be 5V, else will require separate power accommodations.
+LED strip needs to be 5V, or will require different power accommodations.
 Any individually programmable LEDs supported by FastLED should work.
 I have used [this WS2812B strip](https://www.amazon.com/gp/product/B08B59CBK9/) which fits 61 LEDs as defined in the beginning of [main.cpp](src/main.cpp).
 The LEDs are powered directly by the USB 5V and proper 1A+ USB adapter should be able adequate unless burning all LEDs at max-white continuously, 
